@@ -1,0 +1,62 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 6188,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "G3oQAAAACAAJ",
+      "etag": "XNDP8aJoJ6M",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/G3oQAAAACAAJ",
+      "volumeInfo": {
+        "title": "The Contaminated Man",
+        "authors": ["Daniel Keyes"],
+        "publishedDate": "1977",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "0583124348"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9780583124348"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 206,
+        "printType": "BOOK",
+        "categories": ["English fiction"],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "language": "en",
+        "previewLink": "http://books.google.com.tr/books?id=G3oQAAAACAAJ&dq=flowers+inauthor:keyes&hl=&cd=21&source=gbs_api",
+        "infoLink": "http://books.google.com.tr/books?id=G3oQAAAACAAJ&dq=flowers+inauthor:keyes&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/The_Contaminated_Man.html?hl=&id=G3oQAAAACAAJ"
+      },
+      "saleInfo": {
+        "country": "TR",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "TR",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=G3oQAAAACAAJ&hl=&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      }
+    }
+  ]
+}
