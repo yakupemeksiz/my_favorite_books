@@ -2,7 +2,7 @@ import 'package:fancy_dio_inspector/fancy_dio_inspector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_favorite_books/bootstrap.dart';
-import 'package:my_favorite_books/core/config/environment_config.dart';
+import 'package:my_favorite_books/core/config/flavor_config.dart';
 import 'package:my_favorite_books/core/utils/extensions/context_extensions.dart';
 import 'package:my_favorite_books/presentation/widgets/flavor_banner.dart';
 import 'package:my_favorite_books/routers/app_router.dart';
@@ -10,13 +10,13 @@ import 'package:my_favorite_books/routers/app_router.dart';
 void main() async {
   await bootstrap(
     () => FlavorBanner(
-      message: EnvironmentConfig.currentEnvironment.toUpperCase(),
+      message: FlavorConfig.currentFlavor.toUpperCase(),
       child: App(),
     ),
   );
 }
 
-class App extends StatelessWidget {
+final class App extends StatelessWidget {
   App({super.key});
 
   final _appRouter = AppRouter();
