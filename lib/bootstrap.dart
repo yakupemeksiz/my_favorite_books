@@ -3,31 +3,34 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:my_favorite_books/core/utils/observers/bloc_observer.dart';
+import 'package:my_favorite_books/inject.dart';
 
-class AppBlocObserver extends BlocObserver {
-  const AppBlocObserver();
-
-  @override
-  void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
-    super.onChange(bloc, change);
-    log('onChange(${bloc.runtimeType}, $change)');
-  }
-
-  @override
-  void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
-    log('onError(${bloc.runtimeType}, $error, $stackTrace)');
-    super.onError(bloc, error, stackTrace);
-  }
-}
-
+/// Bootstrap the app with the given builder function
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+  /// Run the app in a zone to catch all errors and log them to the console
+  await runZonedGuarded(() async {
+    Bloc.observer = const AppBlocObserver();
+
+    /// Load environment variables from .env file
+    await dotenv.load();
+
+    /// Configure dependencies using injectable
+    configureDependencies();
+
+    /// Run the app
+    runApp(await builder());
+  }, (error, stack) {
+    log(error.toString(), stackTrace: stack, name: 'bootstrap');
+  });
+
+  /// Log all errors to the console
   FlutterError.onError = (details) {
-    log(details.exceptionAsString(), stackTrace: details.stack);
+    log(
+      details.exceptionAsString(),
+      stackTrace: details.stack,
+      name: 'FlutterError',
+    );
   };
-
-  Bloc.observer = const AppBlocObserver();
-
-  // Add cross-flavor configuration here
-
-  runApp(await builder());
 }
