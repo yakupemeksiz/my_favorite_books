@@ -1,10 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_favorite_books/core/constants/hive_type_constants.dart';
 import 'package:my_favorite_books/domain/entities/volume_response_entity.dart';
+
+part 'volume_response_model.g.dart';
 
 /// Volume response model class
 final class VolumeResponseModel extends Equatable {
-  final List<VolumeItemModel> items;
-
+  final List<VolumeItemModel>? items;
   final int totalItems;
 
   const VolumeResponseModel({
@@ -15,11 +18,13 @@ final class VolumeResponseModel extends Equatable {
   factory VolumeResponseModel.fromJson(Map<String, dynamic> json) {
     return VolumeResponseModel(
       totalItems: json['totalItems']?.toInt() as int,
-      items: List<VolumeItemModel>.from(
-        json['items']?.map(
-          (dynamic x) => VolumeItemModel.fromJson(x),
-        ),
-      ),
+      items: json.containsKey('items')
+          ? List<VolumeItemModel>.from(
+              json['items']?.map(
+                (dynamic x) => VolumeItemModel.fromJson(x),
+              ),
+            )
+          : null,
     );
   }
 
@@ -27,31 +32,37 @@ final class VolumeResponseModel extends Equatable {
   String toString() => '''VolumeResponseModel(items: $items)''';
 
   @override
-  List<Object> get props => [items];
+  List<Object?> get props => [items, totalItems];
 
   VolumeResponseEntity toEntity() {
     return VolumeResponseEntity(
-      items: items.map((e) => e.toEntity()).toList(),
       totalItems: totalItems,
+      items: items?.map((e) => e.toEntity()).toList(),
     );
   }
 }
 
+@HiveType(typeId: HiveTypeConstants.volumeItemModel)
 final class VolumeItemModel extends Equatable {
+  @HiveField(0)
   final VolumeInfoModel volumeInfo;
+  @HiveField(1)
+  final String id;
   const VolumeItemModel({
     required this.volumeInfo,
+    required this.id,
   });
 
   factory VolumeItemModel.fromJson(Map<String, dynamic> json) {
     return VolumeItemModel(
       volumeInfo:
           VolumeInfoModel.fromJson(json['volumeInfo'] as Map<String, dynamic>),
+      id: json['id'] as String,
     );
   }
 
   @override
-  String toString() => '''VolumeItemModel(volumeInfo: $volumeInfo)''';
+  String toString() => '''VolumeItemModel(volumeInfo: $volumeInfo, id: $id)''';
 
   @override
   List<Object> get props => [volumeInfo];
@@ -59,17 +70,26 @@ final class VolumeItemModel extends Equatable {
   VolumeItemEntity toEntity() {
     return VolumeItemEntity(
       volumeInfo: volumeInfo.toEntity(),
+      id: id,
     );
   }
 }
 
+@HiveType(typeId: HiveTypeConstants.volumeInfoModel)
 final class VolumeInfoModel extends Equatable {
+  @HiveField(0)
   final String? title;
+  @HiveField(1)
   final String? description;
+  @HiveField(2)
   final String? publisher;
+  @HiveField(3)
   final String? publishedDate;
+  @HiveField(4)
   final int? pageCount;
+  @HiveField(5)
   final ImageLinksModel? imageLinks;
+  @HiveField(6)
   final List<String>? authors;
 
   const VolumeInfoModel({
@@ -127,8 +147,11 @@ final class VolumeInfoModel extends Equatable {
   }
 }
 
+@HiveType(typeId: HiveTypeConstants.imageLinksModel)
 final class ImageLinksModel extends Equatable {
+  @HiveField(0)
   final String? smallThumbnail;
+  @HiveField(1)
   final String? thumbnail;
 
   const ImageLinksModel({
