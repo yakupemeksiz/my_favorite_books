@@ -196,7 +196,8 @@ final class _NetworkImage extends StatelessWidget {
         );
       },
       errorWidget: (context, url, error) => const Icon(Icons.error),
-      placeholder: (context, url) => const CircularProgressIndicator.adaptive(),
+      placeholder: (context, url) =>
+          const Center(child: CircularProgressIndicator.adaptive()),
       imageUrl: imageUrl ?? fallbackUrl,
       fit: BoxFit.contain,
       width: 80.w,

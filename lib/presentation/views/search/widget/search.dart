@@ -41,6 +41,7 @@ final class _SearchWidgetState extends State<_SearchWidget> {
     }
 
     widget.onSearch(_textEditingController.text);
+    FocusScope.of(context).unfocus();
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:fancy_dio_inspector/fancy_dio_inspector.dart';
 import 'package:flutter/material.dart';
+import 'package:my_favorite_books/core/config/flavor_config.dart';
 import 'package:my_favorite_books/core/utils/extensions/context_extensions.dart';
 
 final class CustomScaffold extends StatelessWidget {
@@ -25,10 +26,12 @@ final class CustomScaffold extends StatelessWidget {
       onTap: () => _onTap(context),
       child: Scaffold(
         body: body,
-        endDrawer: SizedBox(
-          width: context.width * 0.8,
-          child: const FancyDioInspectorView(),
-        ),
+        endDrawer: !FlavorConfig.isProd
+            ? SizedBox(
+                width: context.width * 0.8,
+                child: const FancyDioInspectorView(),
+              )
+            : null,
       ),
     );
   }
