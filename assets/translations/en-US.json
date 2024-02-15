@@ -1,0 +1,16 @@
+{
+  "appTitle": "My Favorite Books",
+  "searchText": "Search",
+  "searchPlaceholder": "Book name, author, or genre...",
+  "authors": "Authors: {}",
+  "publisher": "Publisher: {}",
+  "pages": "Pages: {}",
+  "publishedAt": "Published at: {}",
+  "noBooksFound": "No books found",
+  "pleaseEnterSearchText": "Please enter search text",
+  "enteredLengthShouldBeAtLeast": "Entered length should be at least 500",
+  "favoriteTitle": "Favorite",
+  "unknownText": "Unknown",
+  "somethingWentWrong": "Something went wrong",
+  "noFavoriteBooksYet": "No favorite books yet"
+}

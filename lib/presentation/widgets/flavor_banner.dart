@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_favorite_books/core/config/environment_config.dart';
+import 'package:my_favorite_books/core/config/flavor_config.dart';
 
 final class FlavorBanner extends StatelessWidget {
   const FlavorBanner({
@@ -14,12 +14,12 @@ final class FlavorBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: EnvironmentConfig.isProd
+      child: FlavorConfig.isProd
           ? child
           : Banner(
               message: message,
               location: BannerLocation.topStart,
-              color: EnvironmentConfig.isStage ? Colors.red : Colors.green,
+              color: FlavorConfig.isStage ? Colors.red : Colors.green,
               child: child,
             ),
     );
