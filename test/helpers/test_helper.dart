@@ -9,13 +9,7 @@ import 'package:my_favorite_books/domain/repositories/remote/volumes_repository.
 
 import 'json_reader.dart';
 
-@GenerateMocks(
-  [VolumesDataSource, VolumesRepository],
-  customMocks: [
-    MockSpec<VolumesDataSource>(as: #MockVolumesDataSource),
-    MockSpec<VolumesRepository>(as: #MockVolumesRepository),
-  ],
-)
+@GenerateMocks([VolumesDataSource, VolumesRepository])
 void main() {}
 
 const dummyDataPath = 'helpers/dummy_data/dummy_data_volumes.json';
