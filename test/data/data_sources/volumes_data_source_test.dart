@@ -2,17 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mock_web_server/mock_web_server.dart';
 import 'package:my_favorite_books/data/data_sources/remote/volumes_data_source.dart';
-import 'package:my_favorite_books/data/models/volume_request_model.dart';
 import 'package:my_favorite_books/data/models/volume_response_model.dart';
 
-import '../../helpers/json_reader.dart';
+import '../../helpers/test_helper.dart';
 
 void main() {
   late VolumesDataSource volumesDataSource;
   late MockWebServer mockWebServer;
   final headers = {'Content-Type': 'application/json'};
-
-  const dummyDataPath = 'helpers/dummy_data/dummy_data_volumes.json';
 
   setUp(() async {
     mockWebServer = MockWebServer();
@@ -26,19 +23,17 @@ void main() {
     mockWebServer.shutdown();
   });
 
-  const request = VolumesRequestModel(query: 'harry potter');
-
   group('VolumesDataSource', () {
     test('should return VolumesRequestModel when the response code is 200',
         () async {
       mockWebServer.enqueue(
-        body: readJson(dummyDataPath),
+        body: jsonVolumesData,
         headers: headers,
       );
 
       final result = await volumesDataSource.getVolumes(
         CancelToken(),
-        request: request,
+        request: volumesRequestModel,
       );
 
       expect(result, isA<VolumeResponseModel>());
@@ -55,7 +50,7 @@ void main() {
       expect(
         () => volumesDataSource.getVolumes(
           CancelToken(),
-          request: request,
+          request: volumesRequestModel,
         ),
         throwsA(isA<Exception>()),
       );

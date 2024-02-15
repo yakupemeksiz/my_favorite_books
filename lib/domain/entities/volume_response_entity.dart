@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
+import 'package:my_favorite_books/data/models/volume_response_model.dart';
 
 final class VolumeResponseEntity extends Equatable {
-  final List<VolumeItemEntity> items;
+  final List<VolumeItemEntity>? items;
   final int totalItems;
 
   const VolumeResponseEntity({
@@ -10,18 +11,27 @@ final class VolumeResponseEntity extends Equatable {
   });
 
   @override
-  List<Object> get props => [items, totalItems];
+  List<Object?> get props => [items, totalItems];
 }
 
 final class VolumeItemEntity extends Equatable {
   final VolumeInfoEntity volumeInfo;
+  final String id;
 
   const VolumeItemEntity({
     required this.volumeInfo,
+    required this.id,
   });
 
   @override
-  List<Object> get props => [volumeInfo];
+  List<Object> get props => [volumeInfo, id];
+
+  VolumeItemModel toModel() {
+    return VolumeItemModel(
+      id: id,
+      volumeInfo: volumeInfo.toModel(),
+    );
+  }
 }
 
 final class VolumeInfoEntity extends Equatable {
@@ -32,6 +42,8 @@ final class VolumeInfoEntity extends Equatable {
   final int? pageCount;
   final ImageLinksEntity? imageLinks;
   final List<String>? authors;
+
+  String? get author => authors?.join(', ');
 
   const VolumeInfoEntity({
     this.title,
@@ -55,6 +67,18 @@ final class VolumeInfoEntity extends Equatable {
       authors,
     ];
   }
+
+  VolumeInfoModel toModel() {
+    return VolumeInfoModel(
+      title: title,
+      description: description,
+      publisher: publisher,
+      publishedDate: publishedDate,
+      pageCount: pageCount,
+      imageLinks: imageLinks?.toModel(),
+      authors: authors,
+    );
+  }
 }
 
 final class ImageLinksEntity extends Equatable {
@@ -68,4 +92,11 @@ final class ImageLinksEntity extends Equatable {
 
   @override
   List<Object?> get props => [smallThumbnail, thumbnail];
+
+  ImageLinksModel toModel() {
+    return ImageLinksModel(
+      smallThumbnail: smallThumbnail,
+      thumbnail: thumbnail,
+    );
+  }
 }
