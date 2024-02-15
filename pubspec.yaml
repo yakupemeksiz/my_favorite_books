@@ -27,9 +27,7 @@ dependencies:
   get_it: ^7.6.7
   hive_flutter: ^1.1.0
   injectable: ^2.3.2
-  intl: ^0.18.0
   retrofit: ^4.1.0
-  theme_tailor_annotation: ^2.1.0
 
 dev_dependencies:
   bloc_test: ^9.1.4
@@ -40,7 +38,6 @@ dev_dependencies:
   injectable_generator: ^2.4.1
   auto_route_generator: ^7.3.2
   hive_generator: ^2.0.1
-  theme_tailor: ^2.1.0
   build_runner: ^2.4.8
   mockito: ^5.4.4
   mock_web_server: ^5.0.0-nullsafety.1
