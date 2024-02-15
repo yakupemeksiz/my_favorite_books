@@ -36,6 +36,7 @@ final class _VolumeBuilderWidget
       context: context,
       removeTop: true,
       child: ListView.separated(
+        padding: EdgeInsets.only(bottom: context.bottomOrDefaultPadding),
         itemCount: state.volumeResponseEntity.items!.length,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         separatorBuilder: (context, index) => Gap(16.h),
